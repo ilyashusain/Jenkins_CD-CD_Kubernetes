@@ -92,7 +92,7 @@ Run ```kubectl get svc``` to see the ip address for the above LoadBalancer, ente
 
 Copy the ```/home/$USER/.kube/config``` file to ```/var/lib/jenkins/.kube```. If the ```/.kube``` directory in ```/var/lib/jenkins/.kube``` does not exist then create it. Use sudo when copying, as such:
 
-```sudo cp config /var/lib/jenkins/.kube/```
+```sudo cp /home/$USER/.kube/config /var/lib/jenkins/.kube/```
 
 Change ownership of the above file so that jenkins owns it and make it executable, without doing so we cannot run ```kubectl``` commands:
 
