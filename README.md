@@ -1,6 +1,6 @@
 # Jenkins ci-cd k8s Pipeline
 
-In this guide we will create a Jenkins K8s pipeline with full ci-cd integration.
+In this guide we will create a Jenkins K8s pipeline with full ci-cd integration for a sample webpage app.
 
 ## 1. Create a node
 
