@@ -10,7 +10,7 @@ Create a node and configure the firewalls to pass in http traffic and jenkins on
 
 Install java, wget, git, docker and kubernetes with the following command:
 
-sudo yum install -y java wget git docker kubectl
+```sudo yum install -y java wget git docker kubectl```
 
 ## 3. Configure docker
 
