@@ -70,7 +70,7 @@ and build the docker image and push to dockerhub:
 
 ## 6. Create k8s cluster for hellowhale deployment
 
-Authenticate with google cloud by following the instructions:
+Authenticate with google cloud and follow the instructions:
 
 ```gcloud auth login```
 
