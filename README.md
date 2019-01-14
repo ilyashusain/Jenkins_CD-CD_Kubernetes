@@ -60,13 +60,13 @@ Then ```cd``` into this repository with:
 
 and build the docker image and push to dockerhub:
 
-```docker build . -t hellowhale```
+```docker build . -t hellowhale
 
-```docker tag hellowhale ilyashusain/hellowhale```
+docker tag hellowhale ilyashusain/hellowhale
 
-```docker login -u ilyashusain -p <Your Dockerhub Password>```
+docker login -u ilyashusain -p <Your Dockerhub Password>
 
-```docker push ilyashusain/hellowhale```
+docker push ilyashusain/hellowhale```
 
 ## 6. Create k8s cluster for hellowhale deployment
 
