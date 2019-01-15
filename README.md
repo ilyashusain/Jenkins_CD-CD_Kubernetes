@@ -28,11 +28,11 @@ Now restart the node through GCP so new user permissions take effect.
 
 Install jenkins (CentOS 7):
 
-```sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo```
-
-```sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key```
-
-```sudo yum install -y jenkins```
+```
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum install -y jenkins
+```
 
 Next, place the jenkins user into the docker group. That way jenkins can run docker commands without sudo (important since jenkins cannot run sudo commands in the first place):
 
@@ -60,13 +60,12 @@ Then ```cd``` into this repository with:
 
 and build the docker image and push to dockerhub:
 
-```docker build . -t hellowhale```
-
-```docker tag hellowhale ilyashusain/hellowhale```
-
-```docker login -u ilyashusain -p <Your Dockerhub Password>```
-
-```docker push ilyashusain/hellowhale```
+```
+docker build . -t hellowhale
+docker tag hellowhale ilyashusain/hellowhale
+docker login -u ilyashusain -p <Your Dockerhub Password>
+docker push ilyashusain/hellowhale
+```
 
 ## 6. Create k8s cluster for hellowhale deployment
 
