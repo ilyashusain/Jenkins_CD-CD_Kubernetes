@@ -50,21 +50,17 @@ Start the docker service:
 
 ```sudo service docker start```
 
-Clone the above repository with git clone:
+Fork the above repository into your own Github account and clone:
 
-```git clone https://github.com/ilyashusain/Jenkins_CD-CD_Kubernetes.git```
+```git clone https://github.com/<Your Github Account>/Jenkins_CD-CD_Kubernetes.git```
 
-Then ```cd``` into this repository with:
-
-```cd Jenkins_CD-CD_Kubernetes/```
-
-and build the docker image and push to dockerhub:
+Then ```cd``` into this repository and build the docker image and push to dockerhub:
 
 ```
 docker build . -t hellowhale
-docker tag hellowhale ilyashusain/hellowhale
-docker login -u ilyashusain -p <Your Dockerhub Password>
-docker push ilyashusain/hellowhale
+docker tag hellowhale <Your Dockerhub Account>/hellowhale
+docker login -u <Your Dockerhub Account> -p <Your Dockerhub Password>
+docker push <Your Dockerhub Account>/hellowhale
 ```
 
 ## 6. Create k8s cluster for hellowhale deployment
@@ -126,16 +122,16 @@ The Build Triggers will trigger a build on each github commit. Under Build Trigg
 In the Build sections, create an ```execute shell``` with the following code:
 
 ```
-IMAGE_NAME="ilyashusain/hellowhale:${BUILD_NUMBER}"
+IMAGE_NAME="<Your Dockerhub Account>/hellowhale:${BUILD_NUMBER}"
 docker build . -t $IMAGE_NAME
-docker login -u ilyashusain -p ${DOCKER_HUB}
+docker login -u <Your Dockerhub Account> -p ${DOCKER_HUB}
 docker push $IMAGE_NAME
 ```
 
 This will build an image and push it to dockerhub on each commit.
 
 ```
-IMAGE_NAME="ilyashusain/hellowhale:${BUILD_NUMBER}"
+IMAGE_NAME="<Your Dockerhub Account>/hellowhale:${BUILD_NUMBER}"
 kubectl set image deployment/hellowhale hellowhale=$IMAGE_NAME
 ```
 
@@ -149,7 +145,6 @@ Make a change to the ```html/index.html```. Then run:
 
 Commit the changes and follow the instructions for git authentication:
 
-git commit -m "Change"
+```git commit -m "Change"```
 
-Finally ```git push```. Switch to the jenkins browser and you should see a progress bar, when it is complete go to your browser and enter the pods ip into the browser as in the last step of step 6. You should see your changes.
-
+Finally ```git push```. Quickly switch to the jenkins browser and click on your project. You should see a progress bar, when it is complete go to your browser and enter the pods ip into the search bar (as in the last step of step 6). You should see the changes you pushed to Github.
