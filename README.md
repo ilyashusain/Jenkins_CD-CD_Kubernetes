@@ -128,11 +128,8 @@ In the Build sections, create an ```execute shell``` with the following code:
 ```
 
 IMAGE_NAME="ilyashusain/hellowhale:${BUILD_NUMBER}"
-
 docker build . -t $IMAGE_NAME
-
 docker login -u ilyashusain -p ${DOCKER_HUB}
-
 docker push $IMAGE_NAME
 
 ```
