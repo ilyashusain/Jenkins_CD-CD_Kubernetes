@@ -128,7 +128,7 @@ docker login -u <Your Dockerhub Account> -p ${DOCKER_HUB}
 docker push $IMAGE_NAME
 ```
 
-This will build an image and push it to dockerhub on each commit.
+This will build an image and push it to dockerhub on each commit. Create another ```execute shell`` and enter the below code:
 
 ```
 IMAGE_NAME="<Your Dockerhub Account>/hellowhale:${BUILD_NUMBER}"
