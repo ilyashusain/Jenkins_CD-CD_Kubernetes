@@ -95,9 +95,10 @@ Copy the ```/home/$USER/.kube/config``` file to ```/var/lib/jenkins/.kube```. If
 
 Change ownership of the above file so that jenkins owns it and make it executable, without doing so we cannot run ```kubectl``` commands:
 
-```sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config```
-
-```chmod +x /var/lib/jenkins/.kube/config ```
+```
+sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
+chmod +x /var/lib/jenkins/.kube/config
+```
 
 Now restart the jenkins service:
 
