@@ -139,7 +139,7 @@ This will reset the deployment image on each commit. We are now finished with th
 
 ## 10. Testing pipeline
 
-Make a change to the ```html/index.html``` in the machine. Then run:
+Make a notable change to the ```html/index.html``` in the machine. Then run:
 
 ```git add html/index.html```
 
