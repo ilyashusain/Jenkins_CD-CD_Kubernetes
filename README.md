@@ -125,13 +125,17 @@ The Build Triggers will trigger a build on each github commit. Under Build Trigg
 
 In the Build sections, create an ```execute shell``` with the following code:
 
-```IMAGE_NAME="ilyashusain/hellowhale:${BUILD_NUMBER}"```
+```
 
-```docker build . -t $IMAGE_NAME```
+IMAGE_NAME="ilyashusain/hellowhale:${BUILD_NUMBER}"
 
-```docker login -u ilyashusain -p ${DOCKER_HUB}```
+docker build . -t $IMAGE_NAME
 
-```docker push $IMAGE_NAME```
+docker login -u ilyashusain -p ${DOCKER_HUB}
+
+docker push $IMAGE_NAME
+
+```
 
 This will build an image and push it to dockerhub on each commit.
 
