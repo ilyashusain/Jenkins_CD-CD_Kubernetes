@@ -116,9 +116,9 @@ Click save.
 
 ## 9. Create a jenkins job
 
-Create a jenkins job, and click ```Github Project```, enter the url of this your github repo.
+Create a jenkins job, and click ```Github Project```, enter the url of your github repo.
 
-Under Source Code Management click ```git``` and insert the github for this repo again.
+Under Source Code Management click ```git``` and insert the github for your repo again.
 
 The Build Triggers will trigger a build on each github commit. Under Build Triggers tick "GitHub hook trigger for GITScm polling".
 
