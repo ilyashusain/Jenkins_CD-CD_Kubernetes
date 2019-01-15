@@ -139,7 +139,7 @@ This will reset the deployment image on each commit. We are now finished with th
 
 ## 10. Testing pipeline
 
-Make a change to the ```html/index.html```. Then run:
+Make a change to the ```html/index.html``` in the machine. Then run:
 
 ```git add html/index.html```
 
@@ -147,4 +147,4 @@ Commit the changes and follow the instructions for git authentication:
 
 ```git commit -m "Change"```
 
-Finally ```git push```. Quickly switch to the jenkins browser and click on your project. You should see a progress bar, when it is complete go to your browser and enter the pods ip into the search bar (as in the last step of step 6). You should see the changes you pushed to Github.
+Finally ```git push```. Quickly switch to the jenkins browser and click on your project. You should see a progress bar, when it is complete go to your browser and enter the LoadBalancer's ip into the search bar (as in the last step of step 6). You should see the changes you pushed to Github.
