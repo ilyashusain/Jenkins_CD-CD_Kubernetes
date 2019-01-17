@@ -38,11 +38,11 @@ Place the jenkins user into the docker group. If this is not done then jenkins w
 
 ```sudo usermod -aG docker jenkins```
 
-Restart the master node so new user permissions for the docker group take effect. Go into the vm and start the jenkins service:
+Restart the master node so new user permissions for the docker group take effect. Go into the master node and start the jenkins service:
 
 ```sudo service jenkins start```
 
-Copy the vms ip into the browser as ```<vms ip>:8080>``` and follow the instructions to setting up a user account for jenkins.
+Copy the master node's ip into the browser as ```<master node ip>:8080>``` and follow the instructions to setting up a user account for jenkins.
 
 ## 5. Setting up docker
 
