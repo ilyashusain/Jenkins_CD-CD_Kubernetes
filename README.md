@@ -4,11 +4,11 @@ In this guide we will use Jenkins to attain full ci-cd integration for our pipel
 
 ## 1. Create a node
 
-Create a node and configure the firewalls to pass in http traffic and jenkins on port ```8080```.
+Create a master node and configure the firewalls to pass in http traffic and jenkins on port ```8080```.
 
 ## 2. Install prerequisite plugins
 
-Install java, wget, git, docker and kubernetes with the following command:
+Install java, wget, git, docker and kubernetes on the master node with the following command:
 
 ```sudo yum install -y java wget git docker kubectl```
 
@@ -18,11 +18,11 @@ Configure docker by placing root user into the docker group. This way, we will n
 
 ```sudo groupadd docker```
 
-Next, place root user into the group:
+Place the root user into the docker group:
 
 ```sudo usermod -aG docker $USER```
 
-Now restart the node through GCP so new user permissions take effect.
+Restart the master node through GCP so new user permissions for the docker group take effect.
 
 ## 4. Install jenkins
 
@@ -34,15 +34,15 @@ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 sudo yum install -y jenkins
 ```
 
-Next, place the jenkins user into the docker group. That way jenkins can run docker commands without sudo (important since jenkins cannot run sudo commands in the first place):
+Place the jenkins user into the docker group. If this is not done then jenkins will not run docker commands as jenkins cannot run as sudo:
 
 ```sudo usermod -aG docker jenkins```
 
-Restart the vm again so new user permissions take effect. Now go into the vm and start the jenkins service:
+Restart the master node so new user permissions for the docker group take effect. Go into the vm and start the jenkins service:
 
 ```sudo service jenkins start```
 
-Then copy the vms ip into the browser as ```<vms ip>:8080>``` and follow the instructions to setting up a user account for jenkins.
+Copy the vms ip into the browser as ```<vms ip>:8080>``` and follow the instructions to setting up a user account for jenkins.
 
 ## 5. Setting up docker
 
@@ -54,7 +54,7 @@ Fork the above repository into your own Github account and clone:
 
 ```git clone https://github.com/<Your Github Account>/Jenkins_CD-CD_Kubernetes.git```
 
-Then ```cd``` into this repository and build the docker image and push to dockerhub:
+```cd``` into this repository and build the docker image and push to dockerhub:
 
 ```
 docker build . -t hellowhale
@@ -77,7 +77,7 @@ Create a deployment for the docker image:
 
 ```kubectl create deployment hellowhale --image ilyashusain/hellowhale```
 
-Expose the deployment with ```type LoadBalancer```:
+Expose the deployment with ```--type LoadBalancer```:
 
 ```kubectl expose deployment/hellowhale --port 80 --name hellowhalesvc --type LoadBalancer```
 
@@ -96,7 +96,7 @@ sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
 chmod +x /var/lib/jenkins/.kube/config
 ```
 
-Now restart the jenkins service:
+Restart the jenkins service:
 
 ```sudo service jenkins restart```
 
@@ -104,10 +104,10 @@ Now restart the jenkins service:
 
 Once you have logged in to jenkins, navigate to ```Manage Jenkins > Configure System```. Under ```Global Properties``` tick environment variables and put ```DOCKER_HUB``` under ```Name``` and your dockerhub password under ```Value```.
 
-Under ```Jenkins Location``` in the ```Jenkins URL``` put ```http://<vm ip where jenkins installed>:8080/```.
+Under ```Jenkins Location``` in the ```Jenkins URL``` put ```http://<master node ip>:8080/```.
 
 Under ```Github``` click "Advanced" and tick "Specify another hook URL for GitHub configuration" and insert into the box that appears:
-```http://<vm ip where jenkins installed>:8080/github-webhook/```. This will allow triggering of updates on git commits.
+```http://<master node ip>:8080/github-webhook/```. This will allow triggering of updates on git commits.
 
 Click save.
 
@@ -147,4 +147,4 @@ Commit the changes and follow the instructions for git authentication:
 
 ```git commit -m "Change"```
 
-Finally ```git push```. Quickly switch to the jenkins browser and click on your project. You should see a progress bar, when it is complete go to your browser and enter the LoadBalancer's ip into the search bar (as in the last step of step 6). You should see the changes you pushed to Github.
+Finally ```git push```. Quickly switch to the jenkins browser and click on your project. You should see a progress bar, when it is complete go to your browser and enter the LoadBalancer's ip into the search bar (as in the last step of step 6). You should see the changes you commited to Github.
